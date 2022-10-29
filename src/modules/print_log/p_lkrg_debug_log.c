@@ -76,7 +76,9 @@ static struct p_addr_name {
    P_LKRG_DEBUG_RULE(hash_from_ex_table),
    P_LKRG_DEBUG_RULE(hash_from_kernel_stext),
    P_LKRG_DEBUG_RULE(hash_from_kernel_rodata),
+#if LINUX_VERSION_CODE < KERNEL_VERSION(5,19,0)
    P_LKRG_DEBUG_RULE(hash_from_iommu_table),
+#endif
    P_LKRG_DEBUG_RULE(hash_from_CPU_data),
    P_LKRG_DEBUG_RULE(p_create_database),
    P_LKRG_DEBUG_RULE(p_register_notifiers),
@@ -123,7 +125,9 @@ static struct p_addr_name {
    P_LKRG_DEBUG_RULE_KPROBE(p_sys_setfsgid),
    P_LKRG_DEBUG_RULE_KPROBE(p_call_usermodehelper_exec),
    P_LKRG_DEBUG_RULE_KPROBE(p_set_current_groups),
-   P_LKRG_DEBUG_RULE_KPROBE(p_ovl_create_or_link),
+#if P_OVL_OVERRIDE_SYNC_MODE
+   P_LKRG_DEBUG_RULE_KPROBE(p_ovl_override_sync),
+#endif
    P_LKRG_DEBUG_RULE_KPROBE(p_revert_creds),
    P_LKRG_DEBUG_RULE_KPROBE(p_override_creds),
    P_LKRG_DEBUG_RULE_KPROBE(p_security_bprm_committing_creds),
